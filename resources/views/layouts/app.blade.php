@@ -287,6 +287,9 @@
         </footer>
     </div>
 
+    <!-- Chatbot Component -->
+    @include('components.chatbot')
+
     <!-- Cart functionality -->
     <script>
         // Update cart count on page load and handle CSS loading

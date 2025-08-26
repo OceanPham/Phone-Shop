@@ -7,7 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Http;
+use App\Services\AIAssistantService;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -89,7 +89,7 @@ class ProductController extends Controller
                 }
             }
 
-            Product::create([
+            $product = Product::create([
                 'tensp' => $request->tensp,
                 'ma_danhmuc' => $request->ma_danhmuc,
                 'don_gia' => $request->don_gia, // Direct numeric value
@@ -103,6 +103,10 @@ class ProductController extends Controller
                 'dac_biet' => $request->has('dac_biet') ? 1 : 0,
                 'ngay_nhap' => now(),
             ]);
+
+            // Add to AI Assistant Vector Database
+            $aiService = new AIAssistantService();
+            $aiService->putItem($product);
 
             if ($request->ajax() || $request->wantsJson()) {
                 return response()->json([
@@ -251,7 +255,8 @@ class ProductController extends Controller
             ]);
 
             // Update AI Assistant Vector Database
-            $this->updateAIAssistantVector($product);
+            $aiService = new AIAssistantService();
+            $aiService->putItem($product);
 
             if ($request->ajax() || $request->wantsJson()) {
                 return response()->json([
@@ -308,7 +313,8 @@ class ProductController extends Controller
             $product->delete();
 
             // Remove from AI Assistant Vector Database
-            $this->removeFromAIAssistantVector($productId);
+            $aiService = new AIAssistantService();
+            $aiService->deleteItem($productId);
 
             // Return JSON response for AJAX requests
             if (request()->ajax() || request()->wantsJson()) {
@@ -370,78 +376,7 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Update AI Assistant Vector Database
-     */
-    private function updateAIAssistantVector(Product $product)
-    {
-        try {
-            // Prepare product data for AI Assistant
-            $productData = [
-                'id' => $product->masanpham,
-                'name' => $product->tensp,
-                'category_id' => $product->ma_danhmuc,
-                'price' => $product->don_gia,
-                'stock' => $product->ton_kho,
-                'discount' => $product->giam_gia,
-                'description' => $product->mo_ta,
-                'specifications' => $product->information,
-                'images' => $product->images_array ?? [],
-                'promote' => $product->promote,
-                'special' => $product->dac_biet,
-                'views' => $product->so_luot_xem,
-                'updated_at' => now()->toISOString()
-            ];
 
-            // Make request to AI Assistant API
-            $response = Http::timeout(config('ai_assistant.timeout', 30))
-                ->withHeaders([
-                    'Authorization' => 'Bearer ' . config('ai_assistant.api_key'),
-                    'Content-Type' => 'application/json',
-                ])
-                ->post(config('ai_assistant.url') . config('ai_assistant.endpoints.update_product'), [
-                    'product' => $productData,
-                    'action' => 'update',
-                    'timestamp' => now()->toISOString()
-                ]);
-
-            if ($response->successful()) {
-                \Log::info('AI Assistant Vector Database updated successfully for product: ' . $product->masanpham);
-            } else {
-                \Log::warning('Failed to update AI Assistant Vector Database for product: ' . $product->masanpham . '. Response: ' . $response->body());
-            }
-        } catch (\Exception $e) {
-            \Log::error('Error updating AI Assistant Vector Database for product ' . $product->masanpham . ': ' . $e->getMessage());
-        }
-    }
-
-    /**
-     * Remove product from AI Assistant Vector Database
-     */
-    private function removeFromAIAssistantVector($productId)
-    {
-        try {
-            // Make request to AI Assistant API to remove product
-            $response = Http::timeout(config('ai_assistant.timeout', 30))
-                ->withHeaders([
-                    'Authorization' => 'Bearer ' . config('ai_assistant.api_key'),
-                    'Content-Type' => 'application/json',
-                ])
-                ->post(config('ai_assistant.url') . config('ai_assistant.endpoints.delete_product'), [
-                    'product_id' => $productId,
-                    'action' => 'delete',
-                    'timestamp' => now()->toISOString()
-                ]);
-
-            if ($response->successful()) {
-                \Log::info('Product removed from AI Assistant Vector Database successfully: ' . $productId);
-            } else {
-                \Log::warning('Failed to remove product from AI Assistant Vector Database: ' . $productId . '. Response: ' . $response->body());
-            }
-        } catch (\Exception $e) {
-            \Log::error('Error removing product from AI Assistant Vector Database ' . $productId . ': ' . $e->getMessage());
-        }
-    }
 
     /**
      * Bulk actions

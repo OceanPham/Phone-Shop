@@ -32,7 +32,7 @@ return [
     ],
 
     'ai_assistant' => [
-        'url' => env('AI_ASSISTANT_URL', 'http://localhost:3000'),
+        'url' => env('AI_ASSISTANT_URL', 'http://localhost:8000'),
         'api_key' => env('AI_ASSISTANT_API_KEY'),
         'timeout' => env('AI_ASSISTANT_TIMEOUT', 30),
     ],

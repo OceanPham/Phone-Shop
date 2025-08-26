@@ -63,6 +63,10 @@ Route::prefix('cart')->name('cart.')->group(function () {
 // Search route (could be in products group)
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 
+// Chatbot routes
+Route::post('/chatbot/chat', [App\Http\Controllers\ChatbotController::class, 'chat'])->name('chatbot.chat');
+Route::get('/chatbot/health', [App\Http\Controllers\ChatbotController::class, 'health'])->name('chatbot.health');
+
 // Admin Routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     // Dashboard
