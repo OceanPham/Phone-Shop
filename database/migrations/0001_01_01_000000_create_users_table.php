@@ -1,0 +1,63 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('tbl_nguoidung', function (Blueprint $table) {
+            $table->id();
+            $table->string('tai_khoan', 50)->nullable();
+            $table->string('mat_khau', 255); // Increase length for bcrypt
+            $table->string('ho_ten', 50);
+            $table->string('email', 255)->unique(); // Increase length for email
+            $table->tinyInteger('vai_tro')->default(3)->comment('1: admin, 2: moderator, 3: customer');
+            $table->string('diachi', 255)->nullable();
+            $table->string('sodienthoai', 11);
+            $table->string('hinh_anh', 255)->nullable();
+            $table->tinyInteger('kich_hoat')->default(1);
+            $table->unsignedBigInteger('shipping_id')->nullable();
+            $table->string('default_payment', 15)->default('codpayment');
+            $table->string('congty', 50)->nullable();
+            $table->string('about_me', 255)->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('remember_token')->nullable();
+            $table->timestamps();
+
+            // Add indexes for performance
+            $table->index(['email', 'vai_tro']);
+            $table->index('tai_khoan');
+        });
+
+        Schema::create('password_reset_tokens', function (Blueprint $table) {
+            $table->string('email')->primary();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+        });
+
+        Schema::create('sessions', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->foreignId('user_id')->nullable()->index();
+            $table->string('ip_address', 45)->nullable();
+            $table->text('user_agent')->nullable();
+            $table->longText('payload');
+            $table->integer('last_activity')->index();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('tbl_nguoidung');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('sessions');
+    }
+};
