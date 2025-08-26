@@ -79,12 +79,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
 
     // Debug route for testing multipart parsing
     Route::post('/products/{masanpham}/test', function (Request $request, $masanpham) {
-        \Log::info('Debug route called with masanpham: ' . $masanpham);
-        \Log::info('Request method: ' . $request->method());
-        \Log::info('Content-Type: ' . $request->header('Content-Type'));
-        \Log::info('All data: ' . json_encode($request->all()));
-        \Log::info('Has tensp: ' . ($request->has('tensp') ? 'YES' : 'NO'));
-        \Log::info('tensp value: ' . $request->input('tensp', 'NOT_FOUND'));
 
         return response()->json([
             'success' => true,
