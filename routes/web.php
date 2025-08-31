@@ -67,6 +67,7 @@ Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::post('/chatbot/chat', [App\Http\Controllers\ChatbotController::class, 'chat'])->name('chatbot.chat');
 Route::get('/chatbot/health', [App\Http\Controllers\ChatbotController::class, 'health'])->name('chatbot.health');
 
+Route::post('/chatbot/stream', [App\Http\Controllers\ChatbotController::class, 'chatStream'])->name('chatbot.stream'); // stream
 // Admin Routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     // Dashboard
