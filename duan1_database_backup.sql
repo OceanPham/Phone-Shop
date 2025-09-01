@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 01, 2025 at 03:02 AM
+-- Generation Time: Aug 26, 2025 at 03:31 AM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.16
 
@@ -140,7 +140,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('ldRqOro50UM9TZHGP4LGmwaTn3mYyg7TGVoMWa3R', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiTmpJNnBXSmRjU3hpZnF3YmlhcEZFVGxjZ2swWWRJUFhITWlUQUU1ayI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9wcm9kdWN0cyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1756649255);
+('LZbNUJ0VtG5vnvxCd52TCMOZOR76uyvXqkcBxdxc', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWkxMRE16SVBZS3hsa2NiNFZwTFVpT2I2MkNKN0FleWxreUhoeENwWCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jYXJ0L2FwaS9jb3VudCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1756179025);
 
 -- --------------------------------------------------------
 
@@ -557,62 +557,23 @@ CREATE TABLE `tbl_sanpham` (
   `dac_biet` tinyint(1) NOT NULL DEFAULT '0',
   `so_luot_xem` int NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `product_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `manufacturer` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `product_line` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `manufacture_date` date DEFAULT NULL,
-  `imei_serial_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `display` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cpu_chipset` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ram` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `internal_storage` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `operating_system` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `battery` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `rear_camera` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `front_camera` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sim_support` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `network` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `wifi_bluetooth_nfc` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ports_connector` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `dimensions_and_weight` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `frame_and_back_materials` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `colors` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `security` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `water_dust_resistance_ip` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `charging_support` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `wholesale_price` decimal(10,2) DEFAULT '0.00',
-  `camera` text COLLATE utf8mb4_unicode_ci,
-  `connectivity_and_network` text COLLATE utf8mb4_unicode_ci,
-  `design_and_dimensions` text COLLATE utf8mb4_unicode_ci,
-  `special_features` text COLLATE utf8mb4_unicode_ci,
-  `commercial_information` text COLLATE utf8mb4_unicode_ci,
-  `inventory_and_sales` text COLLATE utf8mb4_unicode_ci,
-  `condition` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `manufacturer_warranty` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `store_warranty` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sku` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `units_received` int DEFAULT '0',
-  `supplier` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_sanpham`
 --
 
-INSERT INTO `tbl_sanpham` (`masanpham`, `tensp`, `don_gia`, `ton_kho`, `images`, `giam_gia`, `ngay_nhap`, `mo_ta`, `information`, `ma_danhmuc`, `id_dmphu`, `promote`, `dac_biet`, `so_luot_xem`, `created_at`, `updated_at`, `product_name`, `manufacturer`, `product_line`, `manufacture_date`, `imei_serial_number`, `display`, `cpu_chipset`, `ram`, `internal_storage`, `operating_system`, `battery`, `rear_camera`, `front_camera`, `sim_support`, `network`, `wifi_bluetooth_nfc`, `ports_connector`, `dimensions_and_weight`, `frame_and_back_materials`, `colors`, `security`, `water_dust_resistance_ip`, `charging_support`, `wholesale_price`, `camera`, `connectivity_and_network`, `design_and_dimensions`, `special_features`, `commercial_information`, `inventory_and_sales`, `condition`, `manufacturer_warranty`, `store_warranty`, `sku`, `units_received`, `supplier`) VALUES
-(1, 'Điện thoại OPPO Reno8 T 5G 256GB', 10999000.00, 50, 'oppo-reno-8t.jpg', 5.00, '2023-04-01 09:20:03', '<p>OPPO Reno8 T 5G 128GB là mẫu điện thoại đầu tiên trong năm 2023 mà OPPO kinh doanh tại Việt Nam. Máy nhận được khá nhiều sự quan tâm đến từ cộng đồng công nghệ về thông số kỹ thuật hết sức ấn tượng như: Camera 108 MP, chipset nhà Qualcomm và màn hình AMOLED.</p>', 'Màn hình: AMOLED6.7\"Full HD+; Hệ điều hành: Android 13; Camera sau: Chính 108 MP & Phụ 2 MP, 2 MP; Camera trước: 32 MP; Chip: Snapdragon 695 5G RAM: 8 GB', 1, 3, 1, 1, 162, '2025-08-25 05:17:27', '2025-08-25 11:00:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(2, 'iPhone 14 Pro Max 256GB', 27990000.00, 25, 'thumb-iphone14prm-1.jpg', 3.00, '2023-03-13 16:16:32', '<p>iPhone 14 Pro Max 256GB cũng đã được chính thức lộ diện trên toàn cầu với chip hiệu năng khủng cùng sự nâng cấp về camera từ nhà Apple.</p>', 'Màn hình: OLED6.7\" Super Retina XDR; Hệ điều hành: iOS 16; Camera sau: Chính 48 MP & Phụ 12 MP, 12 MP; Camera trước: 12 MP; Chip: Apple A16 Bionic', 2, 4, 1, 1, 68, '2025-08-25 05:17:27', '2025-08-25 09:01:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(3, 'Samsung Galaxy S23 Ultra 256GB', 26990000.00, 30, 's23u-1.png,s23u-2.png,s23u-3.png', 5.00, '2023-03-17 13:26:50', '<p>Samsung Galaxy S23 Ultra là điện thoại cao cấp với camera 200MP ấn tượng cùng khung viền vuông vức sang trọng.</p>', 'Màn hình: Dynamic AMOLED 2X 6.8\"; Camera sau: Chính 200MP, Tele 10MP x2, Siêu rộng 12MP; Chip: Snapdragon 8 Gen 2; RAM: 8GB; Pin: 5.000mAh', 3, 10, 1, 1, 39, '2025-08-25 05:17:27', '2025-08-25 00:04:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(4, 'Xiaomi 13 Pro 5G 256GB', 29990000.00, 20, 'thumb-xiaomi-poco-f3.jpeg', 8.00, '2023-03-13 20:48:54', '<p>Xiaomi 13 Pro với chip Snapdragon 8 Gen 2 mạnh mẽ cùng sự cộng tác với Leica để khiến người dùng đam mê nhiếp ảnh.</p>', 'Màn hình: AMOLED6.73\"Quad HD+; Camera sau: Chính 50 MP & Phụ 50 MP, 50 MP; Chip: Snapdragon 8 Gen 2; RAM: 12 GB; Pin: 4820 mAh120 W', 4, 14, 1, 1, 22, '2025-08-25 05:17:27', '2025-08-25 05:17:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(5, 'OPPO A96 128GB', 5990000.00, 100, 'oppo-a77s-xanh.jpg', 8.00, '2023-03-12 09:21:43', '<p>OPPO A96 sở hữu ngoại hình bắt mắt cùng cấu hình ấn tượng trong phân khúc giá.</p>', 'Màn hình: IPS LCD6.59\"Full HD+; Camera sau: Chính 50 MP & Phụ 2 MP; Chip: Snapdragon 680; RAM: 8 GB; Pin: 5000 mAh33 W', 1, 1, 0, 0, 16, '2025-08-25 05:17:27', '2025-08-25 00:04:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(6, 'iPhone 13 256GB', 16990000.00, 60, 'iphone13-1.jpg,iphone13-2.jpg', 5.00, '2023-03-13 16:19:19', '<p>iPhone 13 với cấu hình mạnh mẽ hơn, pin \"trâu\" hơn và khả năng quay phim chụp ảnh ấn tượng.</p>', 'Màn hình: OLED6.1\"Super Retina XDR; Camera sau: 2 camera 12 MP; Chip: Apple A15 Bionic; RAM: 4 GB; Pin: 3240 mAh20 W', 2, 5, 0, 0, 28, '2025-08-25 05:17:27', '2025-08-25 05:17:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(7, 'Samsung Galaxy A73 5G 256GB', 10290000.00, 80, 'a73-1.jpg,a73-2.jpg', 5.00, '2023-03-17 13:26:50', '<p>Galaxy A73 5G với camera 108MP và màn hình Super AMOLED Plus 6.7 inch.</p>', 'Màn hình: Super AMOLED 6.7\"; Camera sau: Chính 108 MP; Chip: Snapdragon 778G 5G; RAM: 8GB; Pin: 5,000mAh', 3, 11, 0, 0, 18, '2025-08-25 05:17:27', '2025-08-25 05:17:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(8, 'Xiaomi Redmi Note 11 Pro 128GB', 6190000.00, 90, 'thumb-xiaomi-poco-f3.jpeg', 10.00, '2023-03-13 20:35:08', '<p>Redmi Note 11 Pro với camera AI 108 MP và pin lớn, sạc siêu nhanh.</p>', 'Màn hình: AMOLED6.67\"Full HD+; Camera sau: Chính 108 MP; Chip: MediaTek Helio G96; RAM: 8 GB; Pin: 5000 mAh67 W', 4, 13, 0, 0, 35, '2025-08-25 05:17:27', '2025-08-25 05:17:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(10, 'Điện thoại OPPO SUpper Reno8 T 5G 22222 GB', 10999000.00, 50, '1756177736_68ad25489cc15.png', 5.00, '2025-08-25 16:48:15', 'OPPO Reno8 T 5G 128GB là mẫu điện thoại đầu tiên trong năm 2023 mà OPPO kinh doanh tại Việt Nam. Máy nhận được khá nhiều sự quan tâm đến từ cộng đồng công nghệ về thông số kỹ thuật hết sức ấn tượng như: Camera 108 MP, chipset nhà Qualcomm và màn hình AMOLED.', 'Màn hình: AMOLED6.7\"Full HD+; Hệ điều hành: Android 13; Camera sau: Chính 108 MP & Phụ 2 MP, 2 MP; Camera trước: 32 MP; Chip: Snapdragon 695 5G RAM: 8 GB', 1, NULL, 1, 1, 61, '2025-08-25 09:48:15', '2025-08-25 21:38:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(18, 'Điện thoại OPPO Reno8 T 5G 2560GBewerwer', 122121.00, 1212, '1756184424_68ad3f687b7f6.png', 12.00, '2025-08-26 05:00:24', '1231 212e123 e21rQ2R 23E4F 2Q TF', 'Q23R F23R F23F 2QF  T2', 3, NULL, 1, 0, 12, '2025-08-25 22:00:24', '2025-08-25 22:00:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(19, 'Điện thoại OPPO Reno8 T 5G 2560GBewerwer', 112.00, 1212, '1756187563_68ad4babdbbf8.png', 100.00, '2025-08-26 05:52:43', '1212121212', 'jkh', 1, NULL, 1, 0, 1, '2025-08-25 22:52:43', '2025-08-31 06:45:21', 'erwerewr', 'asdasdasd', 'ádas', '2025-08-02', 'adasdasd', 'jhghj', 'jhgjhg', 'hj', 'jhgjhg', 'jhgjhghj', 'jkhgjhg', 'jhgjhgjhg', 'pk;kl', 'khkhjg', 'kjhkjh', 'jkh', 'kjhkjh', 'kjhkjh', 'kjhklj', 'hjkhhg', 'hkjhkjhjk', 'kjhjhkjhjk', 'hkjhkjhj', 0.00, 'juh', 'jkhkjh', 'hkjhkjhjk', 'hkljhkjhkjhk', 'hb', 'nmb', 'new', 'kbb', 'hb', 'adasdasd', 12123, 'asdas asda'),
-(20, 'jhbvhj', 122.00, 564, '1756648640_68b454c01ea0e.png', 5.00, '2025-08-31 13:56:07', 'gdfy t erer', NULL, 2, NULL, 1, 1, 454, '2025-08-31 06:56:07', '2025-08-31 06:57:20', 'kjnkjhkjh', 'kjhkjhjk', 'hjkhkjh', '2025-07-30', 'wwerew', 't 76', 't8y', 'yiuy', 'y', 'jhgjhghj', 'huy', 'h hug hg yg', 'y ugh hg hj', 'jhgjhgjh', 'gjhghjg', 'jhg', 'hjgjhgjhgjh', 'jhhjgjhgjg', 'hjgfgffg', 'dfg', 'hgfghfhgfghf', 'hgfhgfghf', 'hgfghfhg', 565.00, 'iyuigh yuyt6tu', 'hjgjhgjhgh', 'ghfhgfghfhg', 'hgfuyhiuhh', 'yugyuguyghj', 'gjhghjgif7t', 'like_new', 'ih9uy', 'uiy', 'khkj', 5465454, '65464567567');
+INSERT INTO `tbl_sanpham` (`masanpham`, `tensp`, `don_gia`, `ton_kho`, `images`, `giam_gia`, `ngay_nhap`, `mo_ta`, `information`, `ma_danhmuc`, `id_dmphu`, `promote`, `dac_biet`, `so_luot_xem`, `created_at`, `updated_at`) VALUES
+(1, 'Điện thoại OPPO Reno8 T 5G 256GB', 10999000.00, 50, 'oppo-reno-8t.jpg', 5.00, '2023-04-01 09:20:03', '<p>OPPO Reno8 T 5G 128GB là mẫu điện thoại đầu tiên trong năm 2023 mà OPPO kinh doanh tại Việt Nam. Máy nhận được khá nhiều sự quan tâm đến từ cộng đồng công nghệ về thông số kỹ thuật hết sức ấn tượng như: Camera 108 MP, chipset nhà Qualcomm và màn hình AMOLED.</p>', 'Màn hình: AMOLED6.7\"Full HD+; Hệ điều hành: Android 13; Camera sau: Chính 108 MP & Phụ 2 MP, 2 MP; Camera trước: 32 MP; Chip: Snapdragon 695 5G RAM: 8 GB', 1, 3, 1, 1, 162, '2025-08-25 05:17:27', '2025-08-25 11:00:20'),
+(2, 'iPhone 14 Pro Max 256GB', 27990000.00, 25, 'thumb-iphone14prm-1.jpg', 3.00, '2023-03-13 16:16:32', '<p>iPhone 14 Pro Max 256GB cũng đã được chính thức lộ diện trên toàn cầu với chip hiệu năng khủng cùng sự nâng cấp về camera từ nhà Apple.</p>', 'Màn hình: OLED6.7\" Super Retina XDR; Hệ điều hành: iOS 16; Camera sau: Chính 48 MP & Phụ 12 MP, 12 MP; Camera trước: 12 MP; Chip: Apple A16 Bionic', 2, 4, 1, 1, 68, '2025-08-25 05:17:27', '2025-08-25 09:01:27'),
+(3, 'Samsung Galaxy S23 Ultra 256GB', 26990000.00, 30, 's23u-1.png,s23u-2.png,s23u-3.png', 5.00, '2023-03-17 13:26:50', '<p>Samsung Galaxy S23 Ultra là điện thoại cao cấp với camera 200MP ấn tượng cùng khung viền vuông vức sang trọng.</p>', 'Màn hình: Dynamic AMOLED 2X 6.8\"; Camera sau: Chính 200MP, Tele 10MP x2, Siêu rộng 12MP; Chip: Snapdragon 8 Gen 2; RAM: 8GB; Pin: 5.000mAh', 3, 10, 1, 1, 39, '2025-08-25 05:17:27', '2025-08-25 00:04:30'),
+(4, 'Xiaomi 13 Pro 5G 256GB', 29990000.00, 20, 'thumb-xiaomi-poco-f3.jpeg', 8.00, '2023-03-13 20:48:54', '<p>Xiaomi 13 Pro với chip Snapdragon 8 Gen 2 mạnh mẽ cùng sự cộng tác với Leica để khiến người dùng đam mê nhiếp ảnh.</p>', 'Màn hình: AMOLED6.73\"Quad HD+; Camera sau: Chính 50 MP & Phụ 50 MP, 50 MP; Chip: Snapdragon 8 Gen 2; RAM: 12 GB; Pin: 4820 mAh120 W', 4, 14, 1, 1, 22, '2025-08-25 05:17:27', '2025-08-25 05:17:27'),
+(5, 'OPPO A96 128GB', 5990000.00, 100, 'oppo-a77s-xanh.jpg', 8.00, '2023-03-12 09:21:43', '<p>OPPO A96 sở hữu ngoại hình bắt mắt cùng cấu hình ấn tượng trong phân khúc giá.</p>', 'Màn hình: IPS LCD6.59\"Full HD+; Camera sau: Chính 50 MP & Phụ 2 MP; Chip: Snapdragon 680; RAM: 8 GB; Pin: 5000 mAh33 W', 1, 1, 0, 0, 16, '2025-08-25 05:17:27', '2025-08-25 00:04:34'),
+(6, 'iPhone 13 256GB', 16990000.00, 60, 'iphone13-1.jpg,iphone13-2.jpg', 5.00, '2023-03-13 16:19:19', '<p>iPhone 13 với cấu hình mạnh mẽ hơn, pin \"trâu\" hơn và khả năng quay phim chụp ảnh ấn tượng.</p>', 'Màn hình: OLED6.1\"Super Retina XDR; Camera sau: 2 camera 12 MP; Chip: Apple A15 Bionic; RAM: 4 GB; Pin: 3240 mAh20 W', 2, 5, 0, 0, 28, '2025-08-25 05:17:27', '2025-08-25 05:17:27'),
+(7, 'Samsung Galaxy A73 5G 256GB', 10290000.00, 80, 'a73-1.jpg,a73-2.jpg', 5.00, '2023-03-17 13:26:50', '<p>Galaxy A73 5G với camera 108MP và màn hình Super AMOLED Plus 6.7 inch.</p>', 'Màn hình: Super AMOLED 6.7\"; Camera sau: Chính 108 MP; Chip: Snapdragon 778G 5G; RAM: 8GB; Pin: 5,000mAh', 3, 11, 0, 0, 18, '2025-08-25 05:17:27', '2025-08-25 05:17:27'),
+(8, 'Xiaomi Redmi Note 11 Pro 128GB', 6190000.00, 90, 'thumb-xiaomi-poco-f3.jpeg', 10.00, '2023-03-13 20:35:08', '<p>Redmi Note 11 Pro với camera AI 108 MP và pin lớn, sạc siêu nhanh.</p>', 'Màn hình: AMOLED6.67\"Full HD+; Camera sau: Chính 108 MP; Chip: MediaTek Helio G96; RAM: 8 GB; Pin: 5000 mAh67 W', 4, 13, 0, 0, 35, '2025-08-25 05:17:27', '2025-08-25 05:17:27'),
+(10, 'Điện thoại OPPO SUpper Reno8 T 5G 11111 GB', 10999000.00, 50, '1756177736_68ad25489cc15.png', 5.00, '2025-08-25 16:48:15', 'OPPO Reno8 T 5G 128GB là mẫu điện thoại đầu tiên trong năm 2023 mà OPPO kinh doanh tại Việt Nam. Máy nhận được khá nhiều sự quan tâm đến từ cộng đồng công nghệ về thông số kỹ thuật hết sức ấn tượng như: Camera 108 MP, chipset nhà Qualcomm và màn hình AMOLED.', 'Màn hình: AMOLED6.7\"Full HD+; Hệ điều hành: Android 13; Camera sau: Chính 108 MP & Phụ 2 MP, 2 MP; Camera trước: 32 MP; Chip: Snapdragon 695 5G RAM: 8 GB', 1, NULL, 1, 1, 61, '2025-08-25 09:48:15', '2025-08-25 20:19:11');
 
 -- --------------------------------------------------------
 
@@ -1021,7 +982,7 @@ ALTER TABLE `tbl_reply_reviews`
 -- AUTO_INCREMENT for table `tbl_sanpham`
 --
 ALTER TABLE `tbl_sanpham`
-  MODIFY `masanpham` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `masanpham` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tbl_shipping`
