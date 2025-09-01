@@ -392,6 +392,7 @@
 <div x-data="{ showModal: false }"
     x-show="showModal"
     x-on:open-modal.window="showModal = true"
+    x-on:open-edit-modal.window="showModal = true"
     x-on:close-modal.window="showModal = false"
     x-on:keydown.escape.window="showModal = false"
     class="fixed inset-0 z-50"
@@ -454,7 +455,7 @@
 
                                 <div class="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Giá bán *</label>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Giá bán lẻ *</label>
                                         <div class="relative">
                                             <input type="number" name="don_gia" min="0" step="1" required
                                                 class="w-full px-3 py-2 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -463,17 +464,20 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Giảm giá (%)</label>
-                                        <input type="number" name="giam_gia" min="0" max="100" step="1"
-                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                            placeholder="0">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Giá sỉ</label>
+                                        <div class="relative">
+                                            <input type="number" name="wholesale_price" min="0" step="1"
+                                                class="w-full px-3 py-2 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                placeholder="0">
+                                            <span class="absolute right-3 top-2 text-gray-500 text-sm">VND</span>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Tồn kho *</label>
-                                        <input type="number" name="ton_kho" min="0" required
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Giảm giá (%)</label>
+                                        <input type="number" name="giam_gia" min="0" max="100" step="1"
                                             class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                             placeholder="0">
                                     </div>
@@ -543,23 +547,327 @@
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                         placeholder="Nhập mô tả ngắn về sản phẩm..."></textarea>
                                 </div>
-
-
                             </div>
                         </div>
 
-                        <div class="mt-6">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Thông tin chi tiết</label>
-                            <textarea name="information" rows="4"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                placeholder="Nhập thông tin chi tiết về sản phẩm..."></textarea>
-                        </div>
-                    </div>
+                        <!-- Product Information Sections -->
+                        <div class="mt-8 space-y-6">
+                            <!-- Basic Product Info -->
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="text-lg font-medium text-gray-900 mb-4">Thông tin cơ bản</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Tên sản phẩm (Product Name)</label>
+                                        <input type="text" name="product_name"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="Tên sản phẩm chính thức...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Nhà sản xuất</label>
+                                        <input type="text" name="manufacturer"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="Apple, Samsung, OPPO...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Dòng sản phẩm</label>
+                                        <input type="text" name="product_line"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="iPhone, Galaxy, Reno...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">SKU</label>
+                                        <input type="text" name="sku"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="Mã SKU sản phẩm...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">IMEI/Serial Number</label>
+                                        <input type="text" name="imei_serial_number"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="IMEI hoặc Serial Number...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Tình trạng</label>
+                                        <select name="condition"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                            <option value="">Chọn tình trạng</option>
+                                            <option value="new">Mới</option>
+                                            <option value="like_new">Như mới</option>
+                                            <option value="good">Tốt</option>
+                                            <option value="fair">Khá</option>
+                                            <option value="poor">Kém</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="bg-gray-50 px-6 py-4 flex justify-end space-x-3">
-                        <button type="button" x-on:click="$dispatch('close-modal')" class="btn-outline">Hủy</button>
-                        <button type="submit" class="btn-primary">Lưu sản phẩm</button>
-                    </div>
+                            <!-- Dates and Inventory -->
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="text-lg font-medium text-gray-900 mb-4">Ngày tháng & Tồn kho</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Ngày sản xuất</label>
+                                        <input type="date" name="manufacture_date"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Ngày nhập kho</label>
+                                        <input type="date" name="stock_in_date"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Số lượng nhập</label>
+                                        <input type="number" name="units_received" min="0"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="0">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Tồn kho hiện tại</label>
+                                        <input type="number" name="ton_kho" min="0"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="0">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Nhà cung cấp</label>
+                                        <input type="text" name="supplier"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="Tên nhà cung cấp...">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Technical Specifications -->
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="text-lg font-medium text-gray-900 mb-4">Thông số kỹ thuật</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Màn hình</label>
+                                        <input type="text" name="display"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="6.1 inch, OLED, 120Hz...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">CPU/Chipset</label>
+                                        <input type="text" name="cpu_chipset"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="Apple A16, Snapdragon 8 Gen 2...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">RAM</label>
+                                        <input type="text" name="ram"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="8GB, 12GB...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Bộ nhớ trong</label>
+                                        <input type="text" name="internal_storage"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="128GB, 256GB...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Hệ điều hành</label>
+                                        <input type="text" name="operating_system"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="iOS 16, Android 13...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Pin</label>
+                                        <input type="text" name="battery"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="4000mAh, 5000mAh...">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Camera Specifications -->
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="text-lg font-medium text-gray-900 mb-4">Camera</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Camera sau</label>
+                                        <input type="text" name="rear_camera"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="48MP + 12MP + 12MP...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Camera trước</label>
+                                        <input type="text" name="front_camera"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="12MP, 32MP...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Thông tin camera</label>
+                                        <textarea name="camera" rows="2"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="Mô tả chi tiết về camera..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Connectivity & Network -->
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="text-lg font-medium text-gray-900 mb-4">Kết nối & Mạng</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Hỗ trợ SIM</label>
+                                        <input type="text" name="sim_support"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="2 Nano SIM, eSIM...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Mạng</label>
+                                        <input type="text" name="network"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="5G, 4G LTE...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">WiFi/Bluetooth/NFC</label>
+                                        <input type="text" name="wifi_bluetooth_nfc"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="WiFi 6, Bluetooth 5.2, NFC...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Cổng kết nối</label>
+                                        <input type="text" name="ports_connector"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="USB-C, Lightning...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Thông tin kết nối</label>
+                                        <textarea name="connectivity_and_network" rows="2"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="Mô tả chi tiết về kết nối..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Design & Dimensions -->
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="text-lg font-medium text-gray-900 mb-4">Thiết kế & Kích thước</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Kích thước & Trọng lượng</label>
+                                        <input type="text" name="dimensions_and_weight"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="147.5 x 71.5 x 7.85mm, 173g...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Chất liệu khung & lưng</label>
+                                        <input type="text" name="frame_and_back_materials"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="Thép không gỉ, Kính...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Màu sắc</label>
+                                        <input type="text" name="colors"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="Đen, Trắng, Vàng, Tím...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Chống nước & bụi</label>
+                                        <input type="text" name="water_dust_resistance_ip"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="IP68, IP67...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Thông tin thiết kế</label>
+                                        <textarea name="design_and_dimensions" rows="2"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="Mô tả chi tiết về thiết kế..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Security & Features -->
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="text-lg font-medium text-gray-900 mb-4">Bảo mật & Tính năng</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Bảo mật</label>
+                                        <input type="text" name="security"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="Face ID, Vân tay, Mật khẩu...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Hỗ trợ sạc</label>
+                                        <input type="text" name="charging_support"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="Sạc nhanh 20W, Sạc không dây...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Tính năng đặc biệt</label>
+                                        <textarea name="special_features" rows="2"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="Mô tả các tính năng đặc biệt..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Warranty Information -->
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="text-lg font-medium text-gray-900 mb-4">Bảo hành</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Bảo hành nhà sản xuất</label>
+                                        <input type="text" name="manufacturer_warranty"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="12 tháng, 24 tháng...">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Bảo hành cửa hàng</label>
+                                        <input type="text" name="store_warranty"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="6 tháng, 12 tháng...">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Commercial Information -->
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="text-lg font-medium text-gray-900 mb-4">Thông tin thương mại</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Thông tin thương mại</label>
+                                        <textarea name="commercial_information" rows="2"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="Thông tin về giá cả, khuyến mãi..."></textarea>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Thông tin tồn kho & bán hàng</label>
+                                        <textarea name="inventory_and_sales" rows="2"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            placeholder="Thông tin về tồn kho, doanh số..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Technical Specifications Detail -->
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="text-lg font-medium text-gray-900 mb-4">Thông số kỹ thuật chi tiết</h4>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Thông số kỹ thuật</label>
+                                    <textarea name="information" rows="4"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        placeholder="Mô tả chi tiết tất cả thông số kỹ thuật..."></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Detailed Information -->
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="text-lg font-medium text-gray-900 mb-4">Thông tin chi tiết</h4>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Mô tả chi tiết</label>
+                                    <textarea name="information" rows="4"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        placeholder="Nhập thông tin chi tiết về sản phẩm..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 px-6 py-4 flex justify-end space-x-3">
+                            <button type="button" x-on:click="$dispatch('close-modal')" class="btn-outline">Hủy</button>
+                            <button type="submit" class="btn-primary">Lưu sản phẩm</button>
+                        </div>
                 </form>
             </div>
         </div>
@@ -655,19 +963,48 @@
 
     // Modal management with Alpine.js events
     window.addEventListener('open-modal', function() {
-        // Only reset form if it's for adding new product (not editing)
         const form = document.getElementById('productForm');
         const title = document.getElementById('modalTitle');
         const methodField = document.getElementById('methodField');
 
-        // Check if this is a new product modal (no method field content)
-        if (form && (!methodField.innerHTML || methodField.innerHTML.trim() === '')) {
+        // Always reset form when opening modal for new product
+        if (form) {
+            // Reset form completely
+            form.reset();
+
+            // Clear method field (for new product)
+            methodField.innerHTML = '';
+
+            // Set title and action for new product
             title.textContent = 'Thêm sản phẩm mới';
             form.action = '{{ route("admin.products.store") }}';
-            document.getElementById('methodField').innerHTML = '';
-            form.reset();
+
+            // Clear all input values manually to ensure complete reset
+            const inputs = form.querySelectorAll('input[type="text"], input[type="number"], input[type="date"]');
+            inputs.forEach(input => {
+                input.value = '';
+            });
+
+            // Clear all textareas
+            const textareas = form.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+                textarea.value = '';
+            });
+
+            // Reset select dropdowns to first option
+            const selects = form.querySelectorAll('select');
+            selects.forEach(select => {
+                if (select.options.length > 0) {
+                    select.selectedIndex = 0;
+                }
+            });
+
+            // Uncheck all checkboxes
+            const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
         }
-        // If method field has content (editing), don't reset
 
         // Hide current images section
         const currentImages = document.getElementById('currentImages');
@@ -677,6 +1014,12 @@
         if (previewContainer) previewContainer.classList.add('hidden');
 
         removedImages = [];
+    });
+
+    // Event for editing product (doesn't reset form)
+    window.addEventListener('open-edit-modal', function() {
+        // This event is specifically for editing, so we don't reset the form
+        // The form will be populated by the editProduct function
     });
 
     function editProduct(productId) {
@@ -713,8 +1056,8 @@
                     console.log('Form action after setup:', document.getElementById('productForm').action);
                     console.log('Method field after setup:', document.getElementById('methodField').innerHTML);
 
-                    // Show modal AFTER setup
-                    window.dispatchEvent(new CustomEvent('open-modal'));
+                    // Show modal AFTER setup using edit-specific event
+                    window.dispatchEvent(new CustomEvent('open-edit-modal'));
 
                     // Force form setup after modal opens
                     setTimeout(() => {
@@ -784,6 +1127,10 @@
                 value: product.don_gia
             },
             {
+                name: 'wholesale_price',
+                value: product.wholesale_price
+            },
+            {
                 name: 'ton_kho',
                 value: product.ton_kho
             },
@@ -794,6 +1141,118 @@
             {
                 name: 'so_luot_xem',
                 value: product.so_luot_xem
+            },
+            {
+                name: 'product_name',
+                value: product.product_name
+            },
+            {
+                name: 'manufacturer',
+                value: product.manufacturer
+            },
+            {
+                name: 'product_line',
+                value: product.product_line
+            },
+            {
+                name: 'sku',
+                value: product.sku
+            },
+            {
+                name: 'imei_serial_number',
+                value: product.imei_serial_number
+            },
+            {
+                name: 'manufacture_date',
+                value: product.manufacture_date
+            },
+            {
+                name: 'units_received',
+                value: product.units_received
+            },
+            {
+                name: 'supplier',
+                value: product.supplier
+            },
+            {
+                name: 'display',
+                value: product.display
+            },
+            {
+                name: 'cpu_chipset',
+                value: product.cpu_chipset
+            },
+            {
+                name: 'ram',
+                value: product.ram
+            },
+            {
+                name: 'internal_storage',
+                value: product.internal_storage
+            },
+            {
+                name: 'operating_system',
+                value: product.operating_system
+            },
+            {
+                name: 'battery',
+                value: product.battery
+            },
+            {
+                name: 'rear_camera',
+                value: product.rear_camera
+            },
+            {
+                name: 'front_camera',
+                value: product.front_camera
+            },
+            {
+                name: 'sim_support',
+                value: product.sim_support
+            },
+            {
+                name: 'network',
+                value: product.network
+            },
+            {
+                name: 'wifi_bluetooth_nfc',
+                value: product.wifi_bluetooth_nfc
+            },
+            {
+                name: 'ports_connector',
+                value: product.ports_connector
+            },
+            {
+                name: 'dimensions_and_weight',
+                value: product.dimensions_and_weight
+            },
+            {
+                name: 'frame_and_back_materials',
+                value: product.frame_and_back_materials
+            },
+            {
+                name: 'colors',
+                value: product.colors
+            },
+            {
+                name: 'security',
+                value: product.security
+            },
+            {
+                name: 'water_dust_resistance_ip',
+                value: product.water_dust_resistance_ip
+            },
+            {
+                name: 'charging_support',
+                value: product.charging_support
+            },
+            {
+                name: 'manufacturer_warranty',
+                value: product.manufacturer_warranty
+            },
+            {
+                name: 'store_warranty',
+                value: product.store_warranty
             }
         ];
 
@@ -811,6 +1270,34 @@
         const textareaFields = [{
                 name: 'mo_ta',
                 value: product.mo_ta
+            },
+            {
+                name: 'information',
+                value: product.information
+            },
+            {
+                name: 'camera',
+                value: product.camera
+            },
+            {
+                name: 'connectivity_and_network',
+                value: product.connectivity_and_network
+            },
+            {
+                name: 'design_and_dimensions',
+                value: product.design_and_dimensions
+            },
+            {
+                name: 'special_features',
+                value: product.special_features
+            },
+            {
+                name: 'commercial_information',
+                value: product.commercial_information
+            },
+            {
+                name: 'inventory_and_sales',
+                value: product.inventory_and_sales
             },
             {
                 name: 'information',
@@ -840,6 +1327,15 @@
             console.log(`Set category = ${product.ma_danhmuc}`);
         } else {
             console.error('Category select not found');
+        }
+
+        // Set condition dropdown
+        const conditionSelect = form.querySelector('select[name="condition"]');
+        if (conditionSelect) {
+            conditionSelect.value = product.condition || '';
+            console.log(`Set condition = ${product.condition}`);
+        } else {
+            console.error('Condition select not found');
         }
 
         // Set checkboxes
